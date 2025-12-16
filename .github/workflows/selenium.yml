@@ -3,14 +3,13 @@ name: Run Selenium Script on Safari
 on:
   push:
     branches:
-      - main  # Trigger workflow on push to main branch
+      - main
   pull_request:
     branches:
-      - main  # Trigger workflow on pull requests targeting the main branch
+      - main
 
-  # Schedule the workflow to run every 6 hours
   schedule:
-    - cron: '0 */6 * * *'  # Cron expression for running every 6 hours
+    - cron: '0 */6 * * *'  # Run every 6 hours
 
 jobs:
   selenium:
@@ -36,4 +35,7 @@ jobs:
 
       - name: Run Selenium script
         run: |
-          python test_selenium.py
+          python test_selenium.py  # This will run your test_selenium.py script
+
+      - name: Print additional debugging info
+        run: echo "Script ran successfully"

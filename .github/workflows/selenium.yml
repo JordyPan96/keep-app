@@ -8,9 +8,9 @@ on:
     branches:
       - main  # Trigger workflow on pull requests targeting the main branch
 
-  # Schedule the workflow to run every 5 minutes
+  # Schedule the workflow to run every 6 hours
   schedule:
-    - cron: '*/5 * * * *'  # Cron expression for running every 5 minutes
+    - cron: '0 */6 * * *'  # Cron expression for running every 6 hours
 
 jobs:
   selenium:

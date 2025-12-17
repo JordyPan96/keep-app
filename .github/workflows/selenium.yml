@@ -13,7 +13,7 @@ on:
 
 jobs:
   selenium:
-    runs-on: macos-13  # GitHub Actions supports Safari on macOS
+    runs-on: macos-latest  # GitHub Actions supports Safari on macOS
 
     steps:
       - name: Checkout repository

@@ -9,7 +9,7 @@ on:
       - main
 
   schedule:
-    - cron: '0 */6 * * *'  # Run every 6 hours
+    - cron: '0 */4 * * *'  # Run every 6 hours
 
 jobs:
   selenium:

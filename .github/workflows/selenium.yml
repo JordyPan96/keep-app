@@ -7,23 +7,31 @@ on:
   pull_request:
     branches:
       - main
-
   schedule:
     - cron: '0 */4 * * *'
     - cron: '30 */3 * * *'
 
 jobs:
   selenium:
-    runs-on: macos-latest  # GitHub Actions supports Safari on macOS
+    runs-on: macos-latest
+    timeout-minutes: 30
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: '3.9'
+
+      - name: Cache pip dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
 
       - name: Install dependencies
         run: |
@@ -33,10 +41,8 @@ jobs:
       - name: Enable SafariDriver
         run: |
           sudo safaridriver --enable
+          safaridriver --version  # Print version for debugging
 
       - name: Run Selenium script
         run: |
-          python test_selenium.py  # This will run your test_selenium.py script
-
-      - name: Print additional debugging info
-        run: echo "Script ran successfully"
+          python test_selenium.py
